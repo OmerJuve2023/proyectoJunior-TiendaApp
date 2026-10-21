@@ -1,9 +1,7 @@
 package org.example.proyectojuniortiendaapp.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.example.proyectojuniortiendaapp.entity.dto.StatusOrder;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,9 +12,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +25,10 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private StatusOrder status;
+    private StatusOrder status = StatusOrder.PENDING;
 
     @Column(precision = 12, scale = 2)
     private BigDecimal subtotal;
@@ -43,8 +43,8 @@ public class Order {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<OrderItem> items=new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> items = new ArrayList<>();
 
 
     public void addItem(OrderItem item) {

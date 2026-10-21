@@ -1,9 +1,7 @@
 package org.example.proyectojuniortiendaapp.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,9 +10,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
-@Getter
-@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class Product {
 
     @Id
@@ -34,8 +33,9 @@ public class Product {
     @Column(nullable = false)
     private int stock;
 
+    @Builder.Default
     @Column(nullable = false)
-    private boolean active;
+    private boolean active = true;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id")
