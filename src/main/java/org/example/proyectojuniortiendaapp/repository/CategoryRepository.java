@@ -1,5 +1,9 @@
 package org.example.proyectojuniortiendaapp.repository;
 
+import org.example.proyectojuniortiendaapp.entity.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CategoryRepository {
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
