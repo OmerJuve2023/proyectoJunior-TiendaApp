@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: proyectoJunior-TiendaApp
+
+  main:
+    banner-mode: off
